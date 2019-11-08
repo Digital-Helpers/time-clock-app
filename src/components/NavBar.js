@@ -1,30 +1,58 @@
 // src/components/NavBar.js
 
-import React from "react";
+import React, {useEffect} from "react";
 import { useAuth0 } from "../utils/react-auth0-wrapper";
-import { Link } from "react-router-dom";
+import { makeStyles } from '@material-ui/core/styles';
+import Paper from '@material-ui/core/Paper';
+import Tabs from '@material-ui/core/Tabs';
+import Tab from '@material-ui/core/Tab';
+import Button from '@material-ui/core/Button';
 
-const NavBar = () => {
+const useStyles = makeStyles(theme => ({
+  root: {
+    flexGrow: 1,
+  },
+  button: {
+    margin: theme.spacing(1),
+  },
+  input: {
+    display: 'none',
+  },
+}));
+
+export default function NavBar(props) {
   const { isAuthenticated, loginWithRedirect, loginWithPopup, logout  } = useAuth0();
-console.log(window.location.origin)
-  return (
-    <div>
-      {!isAuthenticated && (
-        <button
-          onClick={() =>
-            loginWithPopup({})
-          }
-        >
-          Log in
-        </button>
-      )}
-      <span>
-        <Link to="/">Home</Link>&nbsp;
-        <Link to="/profile">Profile</Link>
-      </span>
-      {isAuthenticated && <button onClick={() => logout()}>Log out</button>}
-    </div>
-  );
-};
+  const classes = useStyles();
+  const [value, setValue] = React.useState(0);
+  function login(){
+    props.history.push('/profile')
+    loginWithPopup({})
+  }
 
-export default NavBar;
+  const handleChange = (event, newValue) => {
+    setValue(newValue);
+  };
+  return (
+    <Paper className={classes.root}>
+      <Tabs
+        value={value}
+        onChange={handleChange}
+        indicatorColor="primary"
+        textColor="primary"
+        centered
+      >
+        <Tab onClick={()=> props.history.push('/')} label="Home" />
+        <Tab onClick={()=> props.history.push('/profile')} label="Dashboard" />
+        {!isAuthenticated && (
+        <Button onClick={()=> login()} variant="outlined" color="primary" className={classes.button}>
+        Login/Sign Up
+      </Button>
+      )}
+      {isAuthenticated && <Tab onClick={()=> props.history.push('/onboarduser')} label="Onboarding" />}
+      {isAuthenticated && <Button onClick={()=> logout()} variant="outlined" color="secondary" className={classes.button}>
+        Logout
+      </Button>}
+      </Tabs>
+    </Paper>
+  );
+}
