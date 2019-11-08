@@ -1,16 +1,15 @@
 import React from 'react';
 import FormGroup from '@material-ui/core/FormGroup';
-import FormControlLabel from '@material-ui/core/FormControlLabel';
 import Switch from '@material-ui/core/Switch';
 import Grid from '@material-ui/core/Grid';
 
 export default function AccountType(props) {
-  const [state, setState] = React.useState({
-    isCompany: false,
-  });
+//   const [state, setState] = React.useState({
+//     isCompany: false,
+//   });
 
-  const handleChange = name => event => {
-    setState({ ...state, [name]: event.target.checked });
+  const handleChange = e => {
+    props.setCompany({ company: e.target.checked });
   };
 
   return (
@@ -20,9 +19,9 @@ export default function AccountType(props) {
           <Grid item>Employee</Grid>
           <Grid item>
           <Switch
-            checked={state.isCompany}
-            onChange={handleChange('isCompany')}
-            value="isCompany"
+            checked={props.company.company}
+            onChange={e => handleChange(e)}
+            value={props.company.company}
             color="primary"
           />
           </Grid>

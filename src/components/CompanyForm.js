@@ -10,15 +10,15 @@ const useStyles = makeStyles(theme => ({
   },
   textField: {
     margin: '15px auto',
-    width: '50%'
+    // width: '50%'
   },
 }));
 
-export default function CompanyForm() {
+export default function CompanyForm({inputs, handleInputChange, handleSubmit}) {
   const classes = useStyles();
 
   return (
-    <form className={classes.container} noValidate autoComplete="off">
+    <form onSubmit={(e)=> handleSubmit(e)} className={classes.container} noValidate autoComplete="off">
 
         <TextField
           id="outlined-basic"
@@ -26,6 +26,9 @@ export default function CompanyForm() {
           label="Name of Company Admin"
           margin="normal"
           variant="outlined"
+          name="adminName"
+          value={inputs.adminName}
+          onChange={(e)=> handleInputChange(e)}
         />
         <TextField
           id="outlined-basic"
@@ -33,6 +36,9 @@ export default function CompanyForm() {
           label="E-mail"
           margin="normal"
           variant="outlined"
+          name="email"
+          value={inputs.email}
+          onChange={(e)=> handleInputChange(e)}
         />
         <TextField
           id="outlined-basic"
@@ -40,6 +46,9 @@ export default function CompanyForm() {
           label="Phone"
           margin="normal"
           variant="outlined"
+          name="phone"
+          value={inputs.phone}
+          onChange={e => handleInputChange(e)}
         />
     </form>
   );

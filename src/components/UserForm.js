@@ -1,6 +1,7 @@
 import React from 'react';
 import { makeStyles } from '@material-ui/core/styles';
 import TextField from '@material-ui/core/TextField';
+import {useInput} from "../utils/useInput"
 
 const useStyles = makeStyles(theme => ({
   container: {
@@ -14,11 +15,12 @@ const useStyles = makeStyles(theme => ({
   },
 }));
 
-export default function UserForm() {
+export default function UserForm({inputs, handleInputChange, handleSubmit}) {
+
   const classes = useStyles();
 
   return (
-    <form className={classes.container} noValidate autoComplete="off">
+    <form onSubmit={(e)=> handleSubmit(e)} className={classes.container} noValidate autoComplete="off">
 
         <TextField
           id="outlined-basic"
@@ -26,6 +28,9 @@ export default function UserForm() {
           label="Name"
           margin="normal"
           variant="outlined"
+          name="name"
+          value={inputs.name}
+          onChange={(e)=> handleInputChange(e)}
         />
         <TextField
           id="outlined-basic"
@@ -33,6 +38,9 @@ export default function UserForm() {
           label="E-mail"
           margin="normal"
           variant="outlined"
+          name="email"
+          value={inputs.email}
+          onChange={(e)=> handleInputChange(e)}
         />
         {/* <TextField
           id="outlined-basic"
