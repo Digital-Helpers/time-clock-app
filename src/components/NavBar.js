@@ -1,6 +1,6 @@
 // src/components/NavBar.js
 
-import React, {useEffect} from "react";
+import React from "react";
 import { useAuth0 } from "../utils/react-auth0-wrapper";
 import { makeStyles } from '@material-ui/core/styles';
 import Paper from '@material-ui/core/Paper';
@@ -21,7 +21,7 @@ const useStyles = makeStyles(theme => ({
 }));
 
 export default function NavBar(props) {
-  const { isAuthenticated, loginWithRedirect, loginWithPopup, logout  } = useAuth0();
+  const { isAuthenticated, loginWithPopup, logout  } = useAuth0();
   const classes = useStyles();
   const [value, setValue] = React.useState(0);
   function login(){

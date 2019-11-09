@@ -11,7 +11,7 @@ const useStyles = makeStyles(theme => ({
   },
   textField: {
     margin: '15px auto',
-    width: '50%'
+    // width: '50%'
   },
 }));
 

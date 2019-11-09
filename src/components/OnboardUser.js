@@ -45,7 +45,7 @@ function getStepContent(step, company, setCompany, inputs, setInputs, handleInpu
                 company={company}
                 />;
     case 1:
-      if(company.company) {
+      if(company) {
         return <CompanyForm 
                   inputs={inputs} 
                   setInputs={setInputs} 
@@ -76,12 +76,12 @@ export default function OnboardUser() {
   
   const [activeStep, setActiveStep] = React.useState(0);
   const [skipped, setSkipped] = React.useState(new Set());
-  const [company, setCompany] = React.useState({company: false})
+  const [company, setCompany] = React.useState(false)
   const steps = getSteps();
   
   const {inputs, setInputs, handleInputChange, handleSubmit} = useInput(()=>{
-    console.log(company.company)
-    if(company.company){
+    console.log(company)
+    if(company){
       axios.post('http://localhost:5001/api/company',inputs)
       .then(res => console.log(res.data))
       .catch(err=> console.log(err.message))

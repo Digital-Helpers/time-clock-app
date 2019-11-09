@@ -4,12 +4,9 @@ import Switch from '@material-ui/core/Switch';
 import Grid from '@material-ui/core/Grid';
 
 export default function AccountType(props) {
-//   const [state, setState] = React.useState({
-//     isCompany: false,
-//   });
 
   const handleChange = e => {
-    props.setCompany({ company: e.target.checked });
+    props.setCompany(e.target.checked );
   };
 
   return (
@@ -19,9 +16,9 @@ export default function AccountType(props) {
           <Grid item>Employee</Grid>
           <Grid item>
           <Switch
-            checked={props.company.company}
+            checked={props.company}
             onChange={e => handleChange(e)}
-            value={props.company.company}
+            value={props.company}
             color="primary"
           />
           </Grid>
