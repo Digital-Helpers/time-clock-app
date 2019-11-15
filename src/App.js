@@ -7,6 +7,7 @@ import NavBar from "./components/NavBar";
 import { BrowserRouter, Route, Switch } from "react-router-dom";
 import Profile from "./components/Profile";
 import OnboardUser from "./components/OnboardUser"
+import Dashboard from "./components/Dashboard"
 
 function App(props) {
   return (
@@ -20,6 +21,7 @@ function App(props) {
           <Route path="/" exact />
           <Route path="/profile" component={Profile} />
           <Route path="/onboarduser" component={OnboardUser} />
+          <Route path="/dashboard" component={Dashboard} />
         </Switch>
       </BrowserRouter>
     </div>
